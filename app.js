@@ -1,9 +1,16 @@
+const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+
+// Exit if private_key not defined
+if (!config.get("private_key")) {
+    console.error("FATAL ERROR: private_key is not defined.");
+    process.exit(1);
+}
 
 // Middleware
 app.use(bodyParser.json());
